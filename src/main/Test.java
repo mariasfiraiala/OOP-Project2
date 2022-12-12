@@ -1,3 +1,5 @@
+package main;
+
 import checker.Checkstyle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
