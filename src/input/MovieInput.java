@@ -2,7 +2,7 @@ package input;
 
 import java.util.ArrayList;
 
-public class Movie {
+public class MovieInput {
     private String name;
     private String year;
     private int duration;
@@ -10,15 +10,15 @@ public class Movie {
     private ArrayList<String> actors = new ArrayList<String>();
     private ArrayList<String> countriesBanned = new ArrayList<String>();
     private int rating;
-    private int totalRatings;
-    private int totalLikes;
+    private int numRatings;
+    private int numLikes;
 
-    public Movie() {
+    public MovieInput() {
 
     }
 
-    public Movie(String name, String year, int duration, ArrayList<String> genres,
-                 ArrayList<String> actors, ArrayList<String> countriesBanned) {
+    public MovieInput(String name, String year, int duration, ArrayList<String> genres,
+                      ArrayList<String> actors, ArrayList<String> countriesBanned) {
         this.name = name;
         this.year = year;
         this.duration = duration;
@@ -83,19 +83,19 @@ public class Movie {
         this.rating = rating;
     }
 
-    public int getTotalRatings() {
-        return totalRatings;
+    public int getNumRatings() {
+        return numRatings;
     }
 
-    public void setTotalRatings(int totalRatings) {
-        this.totalRatings = totalRatings;
+    public void setNumRatings(int numRatings) {
+        this.numRatings = numRatings;
     }
 
-    public int getTotalLikes() {
-        return totalLikes;
+    public int getNumLikes() {
+        return numLikes;
     }
 
-    public void setTotalLikes(int totalLikes) {
-        this.totalLikes = totalLikes;
+    public void setNumLikes(int numLikes) {
+        this.numLikes = numLikes;
     }
 }

@@ -3,15 +3,21 @@ package main;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import input.DataInput;
+import platform.Session;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayNode output = objectMapper.createArrayNode();
+        DataInput database = (DataInput)objectMapper.readValue(new File(args[0]), DataInput.class);
+
+        Session.getInstance().reset();
+        Session.getInstance().uploadData(database);
+        Session.getInstance().startSession();
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(args[1]), output);

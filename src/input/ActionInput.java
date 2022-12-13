@@ -1,16 +1,17 @@
 package input;
 
-public class Action {
+public class ActionInput {
     private String type;
     private String page;
     private String movie;
     private String feature;
-    private String name, password, accountType, country, balance;
+    private CredentialsInput credentials;
     private String startsWith;
     private String count;
-    private String rate;
+    private int rate;
+    private String objectType;
 
-    public Action() {
+    public ActionInput() {
 
     }
 
@@ -46,44 +47,12 @@ public class Action {
         this.feature = feature;
     }
 
-    public String getName() {
-        return name;
+    public CredentialsInput getCredentials() {
+        return credentials;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getBalance() {
-        return balance;
-    }
-
-    public void setBalance(String balance) {
-        this.balance = balance;
+    public void setCredentials(CredentialsInput credentials) {
+        this.credentials = credentials;
     }
 
     public String getStartsWith() {
@@ -102,11 +71,19 @@ public class Action {
         this.count = count;
     }
 
-    public String getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(int rate) {
         this.rate = rate;
+    }
+
+    public String getObjectType() {
+        return objectType;
+    }
+
+    public void setObjectType(String objectType) {
+        this.objectType = objectType;
     }
 }
