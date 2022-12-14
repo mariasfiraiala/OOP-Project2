@@ -9,22 +9,15 @@ public class MovieInput {
     private ArrayList<String> genres = new ArrayList<String>();
     private ArrayList<String> actors = new ArrayList<String>();
     private ArrayList<String> countriesBanned = new ArrayList<String>();
-    private int rating;
-    private int numRatings;
-    private int numLikes;
 
-    public MovieInput() {
-
-    }
-
-    public MovieInput(String name, String year, int duration, ArrayList<String> genres,
-                      ArrayList<String> actors, ArrayList<String> countriesBanned) {
-        this.name = name;
-        this.year = year;
-        this.duration = duration;
-        this.genres = genres;
-        this.actors = actors;
-        this.countriesBanned = countriesBanned;
+    public MovieInput() { }
+    public MovieInput(MovieInput movie) {
+        this.name = movie.name;
+        this.year = movie.year;
+        this.duration = movie.duration;
+        this.genres = movie.genres;
+        this.actors = movie.actors;
+        this.countriesBanned = movie.countriesBanned;
     }
 
     public String getName() {
@@ -73,29 +66,5 @@ public class MovieInput {
 
     public void setCountriesBanned(ArrayList<String> countriesBanned) {
         this.countriesBanned = countriesBanned;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public int getNumRatings() {
-        return numRatings;
-    }
-
-    public void setNumRatings(int numRatings) {
-        this.numRatings = numRatings;
-    }
-
-    public int getNumLikes() {
-        return numLikes;
-    }
-
-    public void setNumLikes(int numLikes) {
-        this.numLikes = numLikes;
     }
 }

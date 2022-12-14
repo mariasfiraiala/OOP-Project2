@@ -7,9 +7,7 @@ public class DataInput {
     ArrayList<MovieInput> movies = new ArrayList<MovieInput>();
     ArrayList<ActionInput> actions = new ArrayList<ActionInput>();
 
-    public DataInput() {
-
-    }
+    public DataInput() { }
 
     public ArrayList<UserInput> getUsers() {
         return users;

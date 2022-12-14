@@ -1,12 +1,10 @@
 package input;
 
-import java.util.ArrayList;
-
 public class UserInput {
-
-    CredentialsInput credentials;
-    public UserInput() {
-
+    private CredentialsInput credentials;
+    public UserInput() { }
+    public UserInput(UserInput user) {
+        this.credentials = user.credentials;
     }
 
     public CredentialsInput getCredentials() {
