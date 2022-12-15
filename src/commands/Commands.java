@@ -3,12 +3,10 @@ package commands;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import info.Movie;
 import info.User;
 import input.ActionInput;
-import pages.Login;
-import pages.Logout;
-import pages.Page;
-import pages.Register;
+import pages.*;
 import platform.Session;
 
 import java.util.ArrayList;
@@ -48,6 +46,9 @@ public class Commands {
                 case "login":
                     ((Login) Session.getInstance().getCurrentPage()).login(action.getCredentials(), output);
                     break;
+                case "search":
+                    ((Movies) Session.getInstance().getCurrentPage()).search(action.getStartsWith(), output);
+                    break;
             }
         }
     }
@@ -76,4 +77,11 @@ public class Commands {
         output.addPOJO(node);
     }
 
+    public static void searchAndFilerSuccess(User currentUser, ArrayList<Movie> currentMovies, ArrayNode output) {
+        ObjectNode node = JsonNodeFactory.instance.objectNode();
+        node.putPOJO("error", null);
+        node.putPOJO("currentMoviesList", currentMovies);
+        node.putPOJO("currentUser", currentUser);
+        output.addPOJO(node);
+    }
 }

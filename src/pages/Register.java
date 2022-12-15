@@ -26,7 +26,7 @@ public class Register extends Page {
 
         UserInput tmp = new UserInput();
         tmp.setCredentials(credentials);
-        User user = new User(tmp, new ArrayList<>());
+        User user = new User(tmp, Session.getInstance().getAllMovies());
 
         Session.getInstance().getAllUsers().add(user);
         Session.getInstance().setCurrentUser(user);
