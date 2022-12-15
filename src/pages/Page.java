@@ -21,7 +21,7 @@ public class Page {
         this.name = name;
     }
 
-    List<Page> getNextPages() {
+    public List<Page> getNextPages() {
         return nextPages;
     }
 

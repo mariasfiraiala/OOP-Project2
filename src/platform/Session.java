@@ -1,6 +1,7 @@
 package platform;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import commands.Commands;
 import pages.Page;
 import input.ActionInput;
 import input.DataInput;
@@ -51,7 +52,28 @@ public class Session {
     }
 
     public void startSession(ArrayList<ActionInput> actions, ArrayNode output) {
-        Page current = PageHierarchy.build();
+        Page currentPage = PageHierarchy.build();
+        User currentUser = new User();
+        currentUser.setIsRegistered(false);
+
+        for (ActionInput action : actions) {
+            switch (action.getType()) {
+                case "change page":
+                    Page nextPage = Commands.changePage(action, currentPage, currentUser, output);
+                    if (nextPage != null) {
+                        currentPage = nextPage;
+                    }
+                    break;
+                case "on page":
+                    nextPage = Commands.onPage(action, currentPage, currentUser, allUsers, output);
+                    if (nextPage != null) {
+                        currentPage = nextPage;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
 
