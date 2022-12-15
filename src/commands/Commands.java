@@ -49,6 +49,9 @@ public class Commands {
                 case "search":
                     ((Movies) Session.getInstance().getCurrentPage()).search(action.getStartsWith(), output);
                     break;
+                case "filter":
+                    ((Movies) Session.getInstance().getCurrentPage()).filter(action.getFilters(), output);
+                    break;
             }
         }
     }
@@ -77,7 +80,7 @@ public class Commands {
         output.addPOJO(node);
     }
 
-    public static void searchAndFilerSuccess(User currentUser, ArrayList<Movie> currentMovies, ArrayNode output) {
+    public static void searchAndFilterSuccess(User currentUser, ArrayList<Movie> currentMovies, ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.putPOJO("error", null);
         node.putPOJO("currentMoviesList", currentMovies);

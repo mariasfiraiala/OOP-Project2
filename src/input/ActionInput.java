@@ -7,6 +7,7 @@ public final class ActionInput {
     private String feature;
     private CredentialsInput credentials;
     private String startsWith;
+    private FiltersInput filters;
     private String count;
     private int rate;
     private String objectType;
@@ -61,6 +62,14 @@ public final class ActionInput {
 
     public void setStartsWith(String startsWith) {
         this.startsWith = startsWith;
+    }
+
+    public FiltersInput getFilters() {
+        return filters;
+    }
+
+    public void setFilters(FiltersInput filters) {
+        this.filters = filters;
     }
 
     public String getCount() {
