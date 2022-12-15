@@ -5,6 +5,7 @@ import commands.Commands;
 import info.User;
 import input.CredentialsInput;
 import input.UserInput;
+import platform.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,20 +15,22 @@ public class Register extends Page {
         super(name, possibleActions);
     }
 
-    public Page register(CredentialsInput credentials, Page currentPage, User currentUser, ArrayList<User> allUsers, ArrayNode output) {
-        for (User user : allUsers) {
+    public void register(CredentialsInput credentials, ArrayNode output) {
+        for (User user : Session.getInstance().getAllUsers()) {
             if (credentials.getName().compareTo(user.getCredentials().getName()) == 0) {
                 Commands.error(output);
-                return currentPage.getNextPages().get(1);
+                Session.getInstance().setCurrentPage(Session.getInstance().getCurrentPage().getNextPages().get(1));
+                return;
             }
         }
 
-        UserInput newUser = new UserInput();
-        newUser.setCredentials(credentials);
-        User user = new User(newUser, new ArrayList<>());
-        allUsers.add(user);
-        currentUser.setUser(user);
+        UserInput tmp = new UserInput();
+        tmp.setCredentials(credentials);
+        User user = new User(tmp, new ArrayList<>());
+
+        Session.getInstance().getAllUsers().add(user);
+        Session.getInstance().setCurrentUser(user);
+        Session.getInstance().setCurrentPage(Session.getInstance().getCurrentPage().getNextPages().get(0));
         Commands.onPageSuccess(user, output);
-        return currentPage.getNextPages().get(0);
     }
 }

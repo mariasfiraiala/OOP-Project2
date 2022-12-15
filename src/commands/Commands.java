@@ -9,15 +9,16 @@ import pages.Login;
 import pages.Logout;
 import pages.Page;
 import pages.Register;
+import platform.Session;
 
 import java.util.ArrayList;
 
 public class Commands {
     private Commands() { }
 
-    public static Page changePage(ActionInput action, Page currentPage, User currentUser, ArrayNode output) {
+    public static void changePage(ActionInput action, ArrayNode output) {
         Page nextPage = null;
-        for (Page page : currentPage.getNextPages()) {
+        for (Page page : Session.getInstance().getCurrentPage().getNextPages()) {
             if (page.getName().compareTo(action.getPage()) == 0) {
                 nextPage = page;
             }
@@ -27,30 +28,28 @@ public class Commands {
             error(output);
         } else {
             switch (action.getPage()) {
-                case "movies", "see details" -> changePageSuccess(currentUser, output);
-                case "logout" -> ((Logout) nextPage).logout(currentUser);
+                case "movies", "see details" -> changePageSuccess(Session.getInstance().getCurrentUser(), output);
+                case "logout" -> ((Logout) nextPage).logout(Session.getInstance().getCurrentUser());
                 case "register" -> System.out.println("ceva");
             }
+            Session.getInstance().setCurrentPage(nextPage);
         }
-
-        return nextPage;
     }
 
-    public static Page onPage(ActionInput action, Page currentPage, User currentUser, ArrayList<User> allUsers, ArrayNode output) {
+    public static void onPage(ActionInput action, ArrayNode output) {
         Page nextPage = null;
-        if (!currentPage.getPossibleActions().contains(action.getFeature())) {
+        if (!Session.getInstance().getCurrentPage().getPossibleActions().contains(action.getFeature())) {
             error(output);
         } else {
             switch (action.getFeature()) {
                 case "register":
-                    nextPage = ((Register) currentPage).register(action.getCredentials(), currentPage, currentUser, allUsers, output);
+                    ((Register) Session.getInstance().getCurrentPage()).register(action.getCredentials(), output);
                     break;
                 case "login":
-                    nextPage = ((Login) currentPage).login(action.getCredentials(), currentPage, currentUser,  allUsers, output);
+                    ((Login) Session.getInstance().getCurrentPage()).login(action.getCredentials(), output);
                     break;
             }
         }
-        return nextPage;
     }
 
     public static void error(ArrayNode output) {

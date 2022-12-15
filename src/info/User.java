@@ -28,18 +28,6 @@ public class User extends UserInput {
         }
     }
 
-    public void setUser(User user) {
-        this.tokensCount = user.tokensCount;
-        this.numFreePremiumMovies = user.numFreePremiumMovies;
-        this.isRegistered = user.isRegistered;
-        this.visibleMovies = user.visibleMovies;
-        this.purchasedMovies = user.purchasedMovies;
-        this.watchedMovies = user.watchedMovies;
-        this.likedMovies = user.likedMovies;
-        this.ratedMovies = user.ratedMovies;
-        super.setCredentials(user.getCredentials());
-    }
-
     public boolean getIsRegistered() {
         return isRegistered;
     }

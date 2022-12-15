@@ -17,7 +17,8 @@ public class Session {
     private static Session instance = null;
     private ArrayList<Movie> allMovies = new ArrayList<Movie>();
     private ArrayList<User> allUsers = new ArrayList<User>();
-    private Page currentPage;
+    private User currentUser;
+    private Page currentPage = PageHierarchy.build();
     private Session() { }
     public static Session getInstance() {
         if (instance == null){
@@ -42,6 +43,22 @@ public class Session {
         this.allUsers = allUsers;
     }
 
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public Page getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Page currentPage) {
+        this.currentPage = currentPage;
+    }
+
     public void uploadData(DataInput data) {
         for (MovieInput movie : data.getMovies()) {
             allMovies.add(new Movie(movie));
@@ -52,23 +69,13 @@ public class Session {
     }
 
     public void startSession(ArrayList<ActionInput> actions, ArrayNode output) {
-        Page currentPage = PageHierarchy.build();
-        User currentUser = new User();
-        currentUser.setIsRegistered(false);
-
         for (ActionInput action : actions) {
             switch (action.getType()) {
                 case "change page":
-                    Page nextPage = Commands.changePage(action, currentPage, currentUser, output);
-                    if (nextPage != null) {
-                        currentPage = nextPage;
-                    }
+                    Commands.changePage(action, output);
                     break;
                 case "on page":
-                    nextPage = Commands.onPage(action, currentPage, currentUser, allUsers, output);
-                    if (nextPage != null) {
-                        currentPage = nextPage;
-                    }
+                    Commands.onPage(action, output);
                     break;
                 default:
                     break;
