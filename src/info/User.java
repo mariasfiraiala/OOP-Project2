@@ -5,7 +5,7 @@ import input.UserInput;
 
 import java.util.ArrayList;
 
-public class User extends UserInput {
+public final class User extends UserInput {
     private int tokensCount;
     private int numFreePremiumMovies = 15;
     @JsonIgnore
@@ -17,7 +17,7 @@ public class User extends UserInput {
 
     public User() { }
 
-    public User(UserInput user, ArrayList<Movie> movies) {
+    public User(final UserInput user, final ArrayList<Movie> movies) {
         super(user);
         for (Movie movie : movies) {
             if (!movie.getCountriesBanned().contains(user.getCredentials().getCountry())) {
@@ -26,7 +26,7 @@ public class User extends UserInput {
         }
     }
 
-    public User(User user) {
+    public User(final User user) {
         super(user);
         this.tokensCount = user.tokensCount;
         this.numFreePremiumMovies = user.numFreePremiumMovies;
@@ -41,7 +41,7 @@ public class User extends UserInput {
         return visibleMovies;
     }
 
-    public void setVisibleMovies(ArrayList<Movie> visibleMovies) {
+    public void setVisibleMovies(final ArrayList<Movie> visibleMovies) {
         this.visibleMovies = visibleMovies;
     }
 
@@ -49,7 +49,7 @@ public class User extends UserInput {
         return purchasedMovies;
     }
 
-    public void setPurchasedMovies(ArrayList<Movie> purchasedMovies) {
+    public void setPurchasedMovies(final ArrayList<Movie> purchasedMovies) {
         this.purchasedMovies = purchasedMovies;
     }
 
@@ -57,7 +57,7 @@ public class User extends UserInput {
         return watchedMovies;
     }
 
-    public void setWatchedMovies(ArrayList<Movie> watchedMovies) {
+    public void setWatchedMovies(final ArrayList<Movie> watchedMovies) {
         this.watchedMovies = watchedMovies;
     }
 
@@ -65,7 +65,7 @@ public class User extends UserInput {
         return likedMovies;
     }
 
-    public void setLikedMovies(ArrayList<Movie> likedMovies) {
+    public void setLikedMovies(final ArrayList<Movie> likedMovies) {
         this.likedMovies = likedMovies;
     }
 
@@ -73,7 +73,7 @@ public class User extends UserInput {
         return ratedMovies;
     }
 
-    public void setRatedMovies(ArrayList<Movie> ratedMovies) {
+    public void setRatedMovies(final ArrayList<Movie> ratedMovies) {
         this.ratedMovies = ratedMovies;
     }
 
@@ -81,7 +81,7 @@ public class User extends UserInput {
         return tokensCount;
     }
 
-    public void setTokensCount(int tokensCount) {
+    public void setTokensCount(final int tokensCount) {
         this.tokensCount = tokensCount;
     }
 
@@ -89,7 +89,7 @@ public class User extends UserInput {
         return numFreePremiumMovies;
     }
 
-    public void setNumFreePremiumMovies(int numFreePremiumMovies) {
+    public void setNumFreePremiumMovies(final int numFreePremiumMovies) {
         this.numFreePremiumMovies = numFreePremiumMovies;
     }
 }

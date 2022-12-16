@@ -2,7 +2,8 @@ package pages;
 
 import java.util.List;
 
-public class PageHierarchy {
+public final class PageHierarchy {
+    public PageHierarchy() { }
     public static Page build() {
         Authenticated authenticated = new Authenticated("authenticated",
                 List.of());

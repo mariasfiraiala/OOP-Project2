@@ -10,10 +10,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(final String[] args) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayNode output = objectMapper.createArrayNode();
-        DataInput database = (DataInput)objectMapper.readValue(new File(args[0]), DataInput.class);
+        DataInput database = (DataInput) objectMapper.readValue(new File(args[0]), DataInput.class);
 
         Session.getInstance().reset();
         Session.getInstance().uploadData(database);

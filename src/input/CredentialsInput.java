@@ -1,6 +1,6 @@
 package input;
 
-public class CredentialsInput {
+public final class CredentialsInput {
     private String name;
     private String password;
     private String accountType;
@@ -9,7 +9,7 @@ public class CredentialsInput {
 
     public CredentialsInput() { }
 
-    public CredentialsInput(CredentialsInput credentials) {
+    public CredentialsInput(final CredentialsInput credentials) {
         this.name = credentials.name;
         this.password = credentials.password;
         this.accountType = credentials.accountType;
@@ -21,7 +21,7 @@ public class CredentialsInput {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -29,7 +29,7 @@ public class CredentialsInput {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
@@ -37,7 +37,7 @@ public class CredentialsInput {
         return accountType;
     }
 
-    public void setAccountType(String accountType) {
+    public void setAccountType(final String accountType) {
         this.accountType = accountType;
     }
 
@@ -45,7 +45,7 @@ public class CredentialsInput {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(final String country) {
         this.country = country;
     }
 
@@ -53,7 +53,7 @@ public class CredentialsInput {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(final String balance) {
         this.balance = balance;
     }
 }

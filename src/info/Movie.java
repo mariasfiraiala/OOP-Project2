@@ -2,19 +2,19 @@ package info;
 
 import input.MovieInput;
 
-public class Movie extends MovieInput {
+public final class Movie extends MovieInput {
     private double rating;
     private int numRatings;
     private int numLikes;
 
-    public Movie(MovieInput movie) {
+    public Movie(final MovieInput movie) {
         super(movie);
         rating = 0;
         numRatings = 0;
         numLikes = 0;
     }
 
-    public Movie(Movie movie) {
+    public Movie(final Movie movie) {
         super(movie);
         this.rating = movie.rating;
         this.numRatings = movie.numRatings;
@@ -24,7 +24,7 @@ public class Movie extends MovieInput {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(final double rating) {
         this.rating = rating;
     }
 
@@ -32,13 +32,15 @@ public class Movie extends MovieInput {
         return numRatings;
     }
 
-    public void setNumRatings(int numRatings) {
+    public void setNumRatings(final int numRatings) {
         this.numRatings = numRatings;
     }
 
-    public int getNumLikes() { return numLikes; }
+    public int getNumLikes() {
+        return numLikes;
+    }
 
-    public void setNumLikes(int numLikes) {
+    public void setNumLikes(final int numLikes) {
         this.numLikes = numLikes;
     }
 }

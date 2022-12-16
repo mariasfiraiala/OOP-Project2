@@ -12,19 +12,21 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-public class Movies extends Page {
+public final class Movies extends Page {
     private ArrayList<Movie> selectedMovies;
-    public Movies(String name, List<String> possibleActions) {
+    public Movies(final String name, final List<String> possibleActions) {
         super(name, possibleActions);
     }
 
-    public void changePage(ActionInput action, ArrayNode output) {
-        selectedMovies = Commands.deepCopy(Session.getInstance().getCurrentUser().getVisibleMovies());
-        Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), selectedMovies, output);
+    public void changePage(final ActionInput action, final ArrayNode output) {
+        selectedMovies = Commands.deepCopy(Session.getInstance().getCurrentUser().
+                getVisibleMovies());
+        Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), selectedMovies,
+                output);
         Session.getInstance().setCurrentPage(this);
     }
 
-    public void search(String startsWith, ArrayNode output) {
+    public void search(final String startsWith, final ArrayNode output) {
         ArrayList<Movie> tmpCurrentMovies = new ArrayList<>();
 
         for (Movie movie : Session.getInstance().getCurrentUser().getVisibleMovies()) {
@@ -33,10 +35,11 @@ public class Movies extends Page {
             }
         }
 
-        Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), tmpCurrentMovies, output);
+        Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), tmpCurrentMovies,
+                output);
     }
 
-    public void filter(FiltersInput filter, ArrayNode output) {
+    public void filter(final FiltersInput filter, final ArrayNode output) {
         ArrayList<Movie> tmpCurrentMovies = new ArrayList<>();
         tmpCurrentMovies.addAll(Session.getInstance().getCurrentUser().getVisibleMovies());
 
@@ -74,10 +77,11 @@ public class Movies extends Page {
                 sortByDuration(tmpCurrentMovies, filter.getSort().getDuration());
             }
         }
-        Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), tmpCurrentMovies, output);
+        Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), tmpCurrentMovies,
+                output);
     }
 
-    private void sortByRating(ArrayList<Movie> movies, String mode) {
+    private void sortByRating(final ArrayList<Movie> movies, final String mode) {
         if (mode.compareTo("decreasing") == 0) {
             movies.sort(Comparator.comparingDouble(Movie::getRating).reversed());
         } else {
@@ -85,7 +89,7 @@ public class Movies extends Page {
         }
     }
 
-    private void sortByDuration(ArrayList<Movie> movies, String mode) {
+    private void sortByDuration(final ArrayList<Movie> movies, final String mode) {
         if (mode.compareTo("decreasing") == 0) {
             movies.sort(Comparator.comparingDouble(Movie::getDuration).reversed());
         } else {

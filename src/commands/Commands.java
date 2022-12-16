@@ -6,15 +6,18 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import info.Movie;
 import info.User;
 import input.ActionInput;
-import pages.*;
+import pages.Login;
+import pages.Movies;
+import pages.Page;
+import pages.Register;
 import platform.Session;
 
 import java.util.ArrayList;
 
-public class Commands {
+public final class Commands {
     private Commands() { }
 
-    public static void changePage(ActionInput action, ArrayNode output) {
+    public static void changePage(final ActionInput action, final ArrayNode output) {
         Page nextPage = null;
         for (Page page : Session.getInstance().getCurrentPage().getNextPages()) {
             if (page.getName().compareTo(action.getPage()) == 0) {
@@ -29,28 +32,35 @@ public class Commands {
         }
     }
 
-    public static void onPage(ActionInput action, ArrayNode output) {
-        if (!Session.getInstance().getCurrentPage().getPossibleActions().contains(action.getFeature())) {
+    public static void onPage(final ActionInput action, final ArrayNode output) {
+        if (!Session.getInstance().getCurrentPage().getPossibleActions().contains(action.
+                getFeature())) {
             error(output);
         } else {
             switch (action.getFeature()) {
                 case "register":
-                    ((Register) Session.getInstance().getCurrentPage()).register(action.getCredentials(), output);
+                    ((Register) Session.getInstance().getCurrentPage()).register(action.
+                            getCredentials(), output);
                     break;
                 case "login":
-                    ((Login) Session.getInstance().getCurrentPage()).login(action.getCredentials(), output);
+                    ((Login) Session.getInstance().getCurrentPage()).login(action.getCredentials(),
+                            output);
                     break;
                 case "search":
-                    ((Movies) Session.getInstance().getCurrentPage()).search(action.getStartsWith(), output);
+                    ((Movies) Session.getInstance().getCurrentPage()).search(action.getStartsWith(),
+                            output);
                     break;
                 case "filter":
-                    ((Movies) Session.getInstance().getCurrentPage()).filter(action.getFilters(), output);
+                    ((Movies) Session.getInstance().getCurrentPage()).filter(action.getFilters(),
+                            output);
+                    break;
+                default:
                     break;
             }
         }
     }
 
-    public static void error(ArrayNode output) {
+    public static void error(final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.put("error", "Error");
         node.putPOJO("currentMoviesList", new ArrayList<>());
@@ -58,7 +68,7 @@ public class Commands {
         output.addPOJO(node);
     }
 
-    public static void changePageSuccess(User currentUser, ArrayNode output) {
+    public static void changePageSuccess(final User currentUser, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.putPOJO("error", null);
         node.putPOJO("currentMoviesList", deepCopy(currentUser.getVisibleMovies()));
@@ -66,7 +76,7 @@ public class Commands {
         output.addPOJO(node);
     }
 
-    public static void onPageSuccess(User currentUser, ArrayNode output) {
+    public static void onPageSuccess(final User currentUser, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.putPOJO("error", null);
         node.putPOJO("currentMoviesList", new ArrayList<>());
@@ -74,7 +84,9 @@ public class Commands {
         output.addPOJO(node);
     }
 
-    public static void searchAndFilterSuccess(User currentUser, ArrayList<Movie> currentMovies, ArrayNode output) {
+    public static void searchAndFilterSuccess(final User currentUser,
+                                              final ArrayList<Movie> currentMovies,
+                                              final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.putPOJO("error", null);
         node.putPOJO("currentMoviesList", deepCopy(currentMovies));
@@ -82,7 +94,7 @@ public class Commands {
         output.addPOJO(node);
     }
 
-    public static ArrayList<Movie> deepCopy(ArrayList<Movie> movies) {
+    public static ArrayList<Movie> deepCopy(final ArrayList<Movie> movies) {
         ArrayList<Movie> newMovies = new ArrayList<>();
 
         for (Movie movie : movies) {

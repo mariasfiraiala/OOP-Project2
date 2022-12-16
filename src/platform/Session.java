@@ -13,7 +13,7 @@ import pages.PageHierarchy;
 
 import java.util.ArrayList;
 
-public class Session {
+public final class Session {
     private static Session instance = null;
     private ArrayList<Movie> allMovies = new ArrayList<Movie>();
     private ArrayList<User> allUsers = new ArrayList<User>();
@@ -21,7 +21,7 @@ public class Session {
     private Page currentPage = PageHierarchy.build();
     private Session() { }
     public static Session getInstance() {
-        if (instance == null){
+        if (instance == null) {
             instance = new Session();
         }
         return instance;
@@ -31,7 +31,7 @@ public class Session {
         return allMovies;
     }
 
-    public void setAllMovies(ArrayList<Movie> allMovies) {
+    public void setAllMovies(final ArrayList<Movie> allMovies) {
         this.allMovies = allMovies;
     }
 
@@ -39,7 +39,7 @@ public class Session {
         return allUsers;
     }
 
-    public void setAllUsers(ArrayList<User> allUsers) {
+    public void setAllUsers(final ArrayList<User> allUsers) {
         this.allUsers = allUsers;
     }
 
@@ -47,7 +47,7 @@ public class Session {
         return currentUser;
     }
 
-    public void setCurrentUser(User currentUser) {
+    public void setCurrentUser(final User currentUser) {
         this.currentUser = currentUser;
     }
 
@@ -55,11 +55,11 @@ public class Session {
         return currentPage;
     }
 
-    public void setCurrentPage(Page currentPage) {
+    public void setCurrentPage(final Page currentPage) {
         this.currentPage = currentPage;
     }
 
-    public void uploadData(DataInput data) {
+    public void uploadData(final DataInput data) {
         for (MovieInput movie : data.getMovies()) {
             allMovies.add(new Movie(movie));
         }
@@ -68,7 +68,7 @@ public class Session {
         }
     }
 
-    public void startSession(ArrayList<ActionInput> actions, ArrayNode output) {
+    public void startSession(final ArrayList<ActionInput> actions, final ArrayNode output) {
         for (ActionInput action : actions) {
             switch (action.getType()) {
                 case "change page" -> Commands.changePage(action, output);

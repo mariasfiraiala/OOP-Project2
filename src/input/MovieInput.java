@@ -11,7 +11,7 @@ public class MovieInput {
     private ArrayList<String> countriesBanned = new ArrayList<String>();
 
     public MovieInput() { }
-    public MovieInput(MovieInput movie) {
+    public MovieInput(final MovieInput movie) {
         this.name = movie.name;
         this.year = movie.year;
         this.duration = movie.duration;
@@ -20,51 +20,51 @@ public class MovieInput {
         this.countriesBanned = movie.countriesBanned;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public final void setName(final String name) {
         this.name = name;
     }
 
-    public int getYear() {
+    public final int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public final void setYear(final int year) {
         this.year = year;
     }
 
-    public int getDuration() {
+    public final int getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public final void setDuration(final int duration) {
         this.duration = duration;
     }
 
-    public ArrayList<String> getGenres() {
+    public final ArrayList<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<String> genres) {
+    public final void setGenres(final ArrayList<String> genres) {
         this.genres = genres;
     }
 
-    public ArrayList<String> getActors() {
+    public final ArrayList<String> getActors() {
         return actors;
     }
 
-    public void setActors(ArrayList<String> actors) {
+    public final void setActors(final ArrayList<String> actors) {
         this.actors = actors;
     }
 
-    public ArrayList<String> getCountriesBanned() {
+    public final ArrayList<String> getCountriesBanned() {
         return countriesBanned;
     }
 
-    public void setCountriesBanned(ArrayList<String> countriesBanned) {
+    public final void setCountriesBanned(final ArrayList<String> countriesBanned) {
         this.countriesBanned = countriesBanned;
     }
 }

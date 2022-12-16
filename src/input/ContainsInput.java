@@ -2,7 +2,7 @@ package input;
 
 import java.util.ArrayList;
 
-public class ContainsInput {
+public final class ContainsInput {
     private ArrayList<String> actors = new ArrayList<String>();
     private ArrayList<String> genre = new ArrayList<String>();
 
@@ -12,7 +12,7 @@ public class ContainsInput {
         return actors;
     }
 
-    public void setActors(ArrayList<String> actors) {
+    public void setActors(final ArrayList<String> actors) {
         this.actors = actors;
     }
 
@@ -20,7 +20,7 @@ public class ContainsInput {
         return genre;
     }
 
-    public void setGenre(ArrayList<String> genre) {
+    public void setGenre(final ArrayList<String> genre) {
         this.genre = genre;
     }
 }

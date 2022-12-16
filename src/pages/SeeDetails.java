@@ -3,33 +3,33 @@ package pages;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import commands.Commands;
 import info.Movie;
-import info.User;
 import input.ActionInput;
 import platform.Session;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeeDetails extends Page {
+public final class SeeDetails extends Page {
     private Movie currentMovie;
-    public SeeDetails(String name, List<String> possibleActions) {
+    public SeeDetails(final String name, final List<String> possibleActions) {
         super(name, possibleActions);
     }
 
-    public void changePage(ActionInput action, ArrayNode output) {
-        Movie currentMovie = null;
+    public void changePage(final ActionInput action, final ArrayNode output) {
+        Movie movieCurrent = null;
         for (Movie movie : ((Movies) this.getNextPages().get(1)).getSelectedMovies()) {
             if (movie.getName().compareTo(action.getMovie()) == 0) {
-                currentMovie = movie;
+                movieCurrent = movie;
             }
         }
 
-        if (currentMovie == null) {
+        if (movieCurrent == null) {
             Commands.error(output);
         } else {
             ArrayList<Movie> newMovies = new ArrayList<>();
-            newMovies.add(new Movie(currentMovie));
-            Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), newMovies, output);
+            newMovies.add(new Movie(movieCurrent));
+            Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), newMovies,
+                    output);
             Session.getInstance().setCurrentPage(this);
         }
     }

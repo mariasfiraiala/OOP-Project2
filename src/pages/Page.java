@@ -12,46 +12,50 @@ public abstract class Page {
     private List<Page> nextPages;
     private List<String> possibleActions;
 
-    public String getName() {
-        return name;
-    }
-
-    public Page(String name, List<String> possibleActions) {
+    public Page(final String name, final List<String> possibleActions) {
         this.name = name;
         this.possibleActions = possibleActions;
     }
 
-    public void changePage(ActionInput action, ArrayNode output) {
+    /**
+     *
+     * @param action
+     * @param output
+     */
+    public void changePage(final ActionInput action, final ArrayNode output) {
         Session.getInstance().setCurrentPage(this);
     }
+    public final String getName() {
+        return name;
+    }
 
-    public void setName(String name) {
+    public final void setName(final String name) {
         this.name = name;
     }
 
-    public List<Page> getNextPages() {
+    public final  List<Page> getNextPages() {
         return nextPages;
     }
 
-    public Page getNextPage(String name) {
-        Page nextPage = null;
+    public final Page getNextPage(final String pageName) {
+        Page pageNext = null;
         for (Page page : nextPages) {
-            if (page.getName().compareTo(name) == 0) {
-                nextPage = page;
+            if (page.getName().compareTo(pageName) == 0) {
+                pageNext = page;
             }
         }
-        return nextPage;
+        return pageNext;
     }
 
-    public void setNextPages(List<Page> nextPages) {
+    public final void setNextPages(final List<Page> nextPages) {
         this.nextPages = nextPages;
     }
 
-    public List<String> getPossibleActions() {
+    public final List<String> getPossibleActions() {
         return possibleActions;
     }
 
-    public void setPossibleActions(ArrayList<String> possibleActions) {
+    public final void setPossibleActions(final ArrayList<String> possibleActions) {
         this.possibleActions = possibleActions;
     }
 }

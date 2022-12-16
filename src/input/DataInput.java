@@ -2,10 +2,10 @@ package input;
 
 import java.util.ArrayList;
 
-public class DataInput {
-    ArrayList<UserInput> users = new ArrayList<UserInput>();
-    ArrayList<MovieInput> movies = new ArrayList<MovieInput>();
-    ArrayList<ActionInput> actions = new ArrayList<ActionInput>();
+public final class DataInput {
+    private ArrayList<UserInput> users = new ArrayList<UserInput>();
+    private ArrayList<MovieInput> movies = new ArrayList<MovieInput>();
+    private ArrayList<ActionInput> actions = new ArrayList<ActionInput>();
 
     public DataInput() { }
 
@@ -13,7 +13,7 @@ public class DataInput {
         return users;
     }
 
-    public void setUsers(ArrayList<UserInput> users) {
+    public void setUsers(final ArrayList<UserInput> users) {
         this.users = users;
     }
 
@@ -21,7 +21,7 @@ public class DataInput {
         return movies;
     }
 
-    public void setMovies(ArrayList<MovieInput> movies) {
+    public void setMovies(final ArrayList<MovieInput> movies) {
         this.movies = movies;
     }
 
@@ -29,7 +29,7 @@ public class DataInput {
         return actions;
     }
 
-    public void setActions(ArrayList<ActionInput> actions) {
+    public void setActions(final ArrayList<ActionInput> actions) {
         this.actions = actions;
     }
 }

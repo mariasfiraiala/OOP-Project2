@@ -6,16 +6,14 @@ import info.User;
 import input.CredentialsInput;
 import input.UserInput;
 import platform.Session;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class Register extends Page {
-    public Register(String name, List<String> possibleActions) {
+public final class Register extends Page {
+    public Register(final String name, final List<String> possibleActions) {
         super(name, possibleActions);
     }
 
-    public void register(CredentialsInput credentials, ArrayNode output) {
+    public void register(final CredentialsInput credentials, final ArrayNode output) {
         for (User user : Session.getInstance().getAllUsers()) {
             if (credentials.getName().compareTo(user.getCredentials().getName()) == 0) {
                 Commands.error(output);
