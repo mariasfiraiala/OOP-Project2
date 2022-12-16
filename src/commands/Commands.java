@@ -6,10 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import info.Movie;
 import info.User;
 import input.ActionInput;
-import pages.Login;
-import pages.Movies;
-import pages.Page;
-import pages.Register;
+import pages.*;
 import platform.Session;
 
 import java.util.ArrayList;
@@ -54,6 +51,29 @@ public final class Commands {
                     ((Movies) Session.getInstance().getCurrentPage()).filter(action.getFilters(),
                             output);
                     break;
+                case "buy tokens":
+                    ((Upgrades) Session.getInstance().getCurrentPage()).buyTokens(action,
+                            Session.getInstance().getCurrentUser(), output);
+                    break;
+                case "buy premium account":
+                    ((Upgrades) Session.getInstance().getCurrentPage()).buyPremium(Session.
+                            getInstance().getCurrentUser(), output);
+                    break;
+                case "purchase":
+                    ((SeeDetails) Session.getInstance().getCurrentPage()).purchase(Session.
+                            getInstance().getCurrentUser(), output);
+                    break;
+                case "watch":
+                    ((SeeDetails) Session.getInstance().getCurrentPage()).watch(Session.
+                            getInstance().getCurrentUser(), output);
+                    break;
+                case "like":
+                    ((SeeDetails) Session.getInstance().getCurrentPage()).like(Session.
+                            getInstance().getCurrentUser(), output);
+                    break;
+                case "rate":
+                    ((SeeDetails) Session.getInstance().getCurrentPage()).rate(action.getRate(),
+                            Session.getInstance().getCurrentUser(), output);
                 default:
                     break;
             }

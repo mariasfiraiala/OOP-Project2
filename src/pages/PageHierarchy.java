@@ -16,7 +16,7 @@ public final class PageHierarchy {
         SeeDetails seeDetails = new SeeDetails("see details",
                 List.of("purchase", "watch", "like", "rate"));
         Upgrades upgrades = new Upgrades("upgrades",
-                List.of("buy premium", "buy tokens"));
+                List.of("buy premium account", "buy tokens"));
         Logout logout = new Logout("logout",
                 List.of());
 

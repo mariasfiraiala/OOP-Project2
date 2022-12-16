@@ -19,8 +19,7 @@ public final class Movies extends Page {
     }
 
     public void changePage(final ActionInput action, final ArrayNode output) {
-        selectedMovies = Commands.deepCopy(Session.getInstance().getCurrentUser().
-                getVisibleMovies());
+        selectedMovies = Session.getInstance().getCurrentUser().getVisibleMovies();
         Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), selectedMovies,
                 output);
         Session.getInstance().setCurrentPage(this);

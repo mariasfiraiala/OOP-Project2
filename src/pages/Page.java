@@ -16,12 +16,6 @@ public abstract class Page {
         this.name = name;
         this.possibleActions = possibleActions;
     }
-
-    /**
-     *
-     * @param action
-     * @param output
-     */
     public void changePage(final ActionInput action, final ArrayNode output) {
         Session.getInstance().setCurrentPage(this);
     }

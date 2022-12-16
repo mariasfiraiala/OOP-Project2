@@ -1,11 +1,14 @@
 package info;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import input.MovieInput;
 
 public final class Movie extends MovieInput {
     private double rating;
     private int numRatings;
     private int numLikes;
+    @JsonIgnore
+    private int sumRatings = 0;
 
     public Movie(final MovieInput movie) {
         super(movie);
@@ -42,5 +45,13 @@ public final class Movie extends MovieInput {
 
     public void setNumLikes(final int numLikes) {
         this.numLikes = numLikes;
+    }
+
+    public int getSumRatings() {
+        return sumRatings;
+    }
+
+    public void setSumRatings(final int sumRatings) {
+        this.sumRatings = sumRatings;
     }
 }

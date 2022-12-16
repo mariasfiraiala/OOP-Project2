@@ -1,6 +1,7 @@
 package info;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import commands.Commands;
 import input.UserInput;
 
 import java.util.ArrayList;
@@ -30,11 +31,11 @@ public final class User extends UserInput {
         super(user);
         this.tokensCount = user.tokensCount;
         this.numFreePremiumMovies = user.numFreePremiumMovies;
-        this.visibleMovies = user.visibleMovies;
-        this.purchasedMovies = user.purchasedMovies;
-        this.watchedMovies = user.watchedMovies;
-        this.likedMovies = user.likedMovies;
-        this.ratedMovies = user.ratedMovies;
+        this.visibleMovies = Commands.deepCopy(user.visibleMovies);
+        this.purchasedMovies = Commands.deepCopy(user.purchasedMovies);
+        this.watchedMovies = Commands.deepCopy(user.watchedMovies);
+        this.likedMovies = Commands.deepCopy(user.likedMovies);
+        this.ratedMovies = Commands.deepCopy(user.ratedMovies);
     }
 
     public ArrayList<Movie> getVisibleMovies() {
