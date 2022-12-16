@@ -25,17 +25,11 @@ public class Commands {
         if (nextPage == null) {
             error(output);
         } else {
-            switch (action.getPage()) {
-                case "movies", "see details" -> changePageSuccess(Session.getInstance().getCurrentUser(), output);
-                case "logout" -> ((Logout) nextPage).logout(Session.getInstance().getCurrentUser());
-                case "register" -> System.out.println("ceva");
-            }
-            Session.getInstance().setCurrentPage(nextPage);
+            nextPage.changePage(action, output);
         }
     }
 
     public static void onPage(ActionInput action, ArrayNode output) {
-        Page nextPage = null;
         if (!Session.getInstance().getCurrentPage().getPossibleActions().contains(action.getFeature())) {
             error(output);
         } else {
@@ -67,8 +61,8 @@ public class Commands {
     public static void changePageSuccess(User currentUser, ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.putPOJO("error", null);
-        node.putPOJO("currentMoviesList", currentUser.getVisibleMovies());
-        node.putPOJO("currentUser", currentUser);
+        node.putPOJO("currentMoviesList", deepCopy(currentUser.getVisibleMovies()));
+        node.putPOJO("currentUser", new User(currentUser));
         output.addPOJO(node);
     }
 
@@ -76,15 +70,25 @@ public class Commands {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.putPOJO("error", null);
         node.putPOJO("currentMoviesList", new ArrayList<>());
-        node.putPOJO("currentUser", currentUser);
+        node.putPOJO("currentUser", new User(currentUser));
         output.addPOJO(node);
     }
 
     public static void searchAndFilterSuccess(User currentUser, ArrayList<Movie> currentMovies, ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.putPOJO("error", null);
-        node.putPOJO("currentMoviesList", currentMovies);
-        node.putPOJO("currentUser", currentUser);
+        node.putPOJO("currentMoviesList", deepCopy(currentMovies));
+        node.putPOJO("currentUser", new User(currentUser));
         output.addPOJO(node);
+    }
+
+    public static ArrayList<Movie> deepCopy(ArrayList<Movie> movies) {
+        ArrayList<Movie> newMovies = new ArrayList<>();
+
+        for (Movie movie : movies) {
+            newMovies.add(new Movie(movie));
+        }
+
+        return newMovies;
     }
 }

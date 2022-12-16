@@ -19,7 +19,7 @@ public class Register extends Page {
         for (User user : Session.getInstance().getAllUsers()) {
             if (credentials.getName().compareTo(user.getCredentials().getName()) == 0) {
                 Commands.error(output);
-                Session.getInstance().setCurrentPage(Session.getInstance().getCurrentPage().getNextPages().get(1));
+                Session.getInstance().setCurrentPage(getNextPage("logout"));
                 return;
             }
         }
@@ -30,7 +30,7 @@ public class Register extends Page {
 
         Session.getInstance().getAllUsers().add(user);
         Session.getInstance().setCurrentUser(user);
-        Session.getInstance().setCurrentPage(Session.getInstance().getCurrentPage().getNextPages().get(0));
+        Session.getInstance().setCurrentPage(getNextPage("authenticated"));
         Commands.onPageSuccess(user, output);
     }
 }

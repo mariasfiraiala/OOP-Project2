@@ -13,6 +13,13 @@ public class Movie extends MovieInput {
         numRatings = 0;
         numLikes = 0;
     }
+
+    public Movie(Movie movie) {
+        super(movie);
+        this.rating = movie.rating;
+        this.numRatings = movie.numRatings;
+        this.numLikes = movie.numLikes;
+    }
     public double getRating() {
         return rating;
     }

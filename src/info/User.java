@@ -9,8 +9,6 @@ public class User extends UserInput {
     private int tokensCount;
     private int numFreePremiumMovies = 15;
     @JsonIgnore
-    boolean isRegistered;
-    @JsonIgnore
     private ArrayList<Movie> visibleMovies = new ArrayList<Movie>();
     private ArrayList<Movie> purchasedMovies = new ArrayList<Movie>();
     private ArrayList<Movie> watchedMovies = new ArrayList<Movie>();
@@ -28,12 +26,15 @@ public class User extends UserInput {
         }
     }
 
-    public boolean getIsRegistered() {
-        return isRegistered;
-    }
-
-    public void setIsRegistered(boolean registered) {
-        isRegistered = registered;
+    public User(User user) {
+        super(user);
+        this.tokensCount = user.tokensCount;
+        this.numFreePremiumMovies = user.numFreePremiumMovies;
+        this.visibleMovies = user.visibleMovies;
+        this.purchasedMovies = user.purchasedMovies;
+        this.watchedMovies = user.watchedMovies;
+        this.likedMovies = user.likedMovies;
+        this.ratedMovies = user.ratedMovies;
     }
 
     public ArrayList<Movie> getVisibleMovies() {

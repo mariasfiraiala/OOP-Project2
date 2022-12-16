@@ -7,8 +7,14 @@ public class CredentialsInput {
     private String country;
     private String balance;
 
-    public CredentialsInput() {
+    public CredentialsInput() { }
 
+    public CredentialsInput(CredentialsInput credentials) {
+        this.name = credentials.name;
+        this.password = credentials.password;
+        this.accountType = credentials.accountType;
+        this.country = credentials.country;
+        this.balance = credentials.balance;
     }
 
     public String getName() {

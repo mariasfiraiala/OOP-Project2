@@ -3,6 +3,7 @@ package pages;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import commands.Commands;
 import info.Movie;
+import input.ActionInput;
 import input.FiltersInput;
 import platform.Session;
 
@@ -12,8 +13,15 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Movies extends Page {
+    private ArrayList<Movie> selectedMovies;
     public Movies(String name, List<String> possibleActions) {
         super(name, possibleActions);
+    }
+
+    public void changePage(ActionInput action, ArrayNode output) {
+        selectedMovies = Commands.deepCopy(Session.getInstance().getCurrentUser().getVisibleMovies());
+        Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), selectedMovies, output);
+        Session.getInstance().setCurrentPage(this);
     }
 
     public void search(String startsWith, ArrayNode output) {
@@ -83,5 +91,9 @@ public class Movies extends Page {
         } else {
             movies.sort(Comparator.comparingDouble(Movie::getDuration));
         }
+    }
+
+    public ArrayList<Movie> getSelectedMovies() {
+        return selectedMovies;
     }
 }

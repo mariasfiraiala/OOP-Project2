@@ -4,7 +4,7 @@ import java.util.List;
 
 public class PageHierarchy {
     public static Page build() {
-        Authenticated authenticated = new Authenticated("home",
+        Authenticated authenticated = new Authenticated("authenticated",
                 List.of());
         Login login = new Login("login",
                 List.of("login"));
@@ -22,7 +22,7 @@ public class PageHierarchy {
         authenticated.setNextPages(List.of(movies, upgrades, logout));
         login.setNextPages(List.of(authenticated, logout));
         register.setNextPages(List.of(authenticated, logout));
-        movies.setNextPages(List.of(authenticated, seeDetails, logout, movies));
+        movies.setNextPages(List.of(authenticated, seeDetails, movies, logout));
         seeDetails.setNextPages(List.of(authenticated, movies, upgrades, logout));
         upgrades.setNextPages(List.of(authenticated, movies, logout));
         logout.setNextPages(List.of(register, login));

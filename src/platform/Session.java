@@ -71,14 +71,10 @@ public class Session {
     public void startSession(ArrayList<ActionInput> actions, ArrayNode output) {
         for (ActionInput action : actions) {
             switch (action.getType()) {
-                case "change page":
-                    Commands.changePage(action, output);
-                    break;
-                case "on page":
-                    Commands.onPage(action, output);
-                    break;
-                default:
-                    break;
+                case "change page" -> Commands.changePage(action, output);
+                case "on page" -> Commands.onPage(action, output);
+                default -> {
+                }
             }
         }
 
