@@ -29,11 +29,12 @@ public final class Movies extends Page {
         ArrayList<Movie> tmpCurrentMovies = new ArrayList<>();
 
         for (Movie movie : Session.getInstance().getCurrentUser().getVisibleMovies()) {
-            if (movie.getName().contains(startsWith)) {
+            if (movie.getName().startsWith(startsWith)) {
                 tmpCurrentMovies.add(movie);
             }
         }
 
+        selectedMovies = tmpCurrentMovies;
         Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), tmpCurrentMovies,
                 output);
     }
@@ -60,7 +61,7 @@ public final class Movies extends Page {
                     Iterator<Movie> movie = tmpCurrentMovies.iterator();
                     while (movie.hasNext()) {
                         Movie next = movie.next();
-                        if (!next.getActors().contains(genre)) {
+                        if (!next.getGenres().contains(genre)) {
                             movie.remove();
                         }
                     }
@@ -69,6 +70,10 @@ public final class Movies extends Page {
         }
 
         if (filter.getSort() != null) {
+            if (filter.getSort().getRating() != null && filter.getSort().getDuration() != null) {
+                sortByRatingAndDuration(tmpCurrentMovies, filter.getSort().getRating(), filter.getSort().getDuration());
+            }
+
             if (filter.getSort().getRating() != null) {
                 sortByRating(tmpCurrentMovies, filter.getSort().getRating());
             }
@@ -76,8 +81,24 @@ public final class Movies extends Page {
                 sortByDuration(tmpCurrentMovies, filter.getSort().getDuration());
             }
         }
+        selectedMovies = tmpCurrentMovies;
         Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), tmpCurrentMovies,
                 output);
+    }
+
+    private void sortByRatingAndDuration(ArrayList<Movie> movies, String modeRating, String modeDuration) {
+        Comparator<Movie> comparator;
+        if (modeDuration.compareTo("decreasing") == 0) {
+            comparator = Comparator.comparing(Movie::getDuration, Comparator.reverseOrder());
+        } else {
+            comparator = Comparator.comparing(Movie::getDuration);
+        }
+        if (modeRating.equals("decreasing")) {
+            comparator = comparator.thenComparing(Movie::getRating, Comparator.reverseOrder());
+        } else {
+            comparator = comparator.thenComparing(Movie::getRating);
+        }
+        movies.sort(comparator);
     }
 
     private void sortByRating(final ArrayList<Movie> movies, final String mode) {

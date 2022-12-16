@@ -108,6 +108,7 @@ public final class SeeDetails extends Page {
             currentMovie.setNumRatings(currentMovie.getNumRatings() + 1);
             currentMovie.setRating((double) currentMovie.getSumRatings()
                     / currentMovie.getNumRatings());
+            currentUser.getRatedMovies().add(currentMovie);
             ArrayList<Movie> newMovies = new ArrayList<>();
             newMovies.add(new Movie(currentMovie));
             Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), newMovies,

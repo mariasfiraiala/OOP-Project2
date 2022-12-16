@@ -1,10 +1,17 @@
 Starting audit...
-[ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Page.java:40:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Page.java:19:5: Class 'Page' looks like designed for extension (can be subclassed), but the method 'changePage' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'Page' final or making the method 'changePage' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Page.java:19:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Page.java:34:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Login.java:15:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Logout.java:14:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Movies.java:21:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Movies.java:28:5: Missing a Javadoc comment. [MissingJavadocMethod]
-[ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Movies.java:41:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Movies.java:42:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Movies.java:74: Line is longer than 100 characters (found 120). [LineLength]
+[ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Movies.java:89: Line is longer than 100 characters (found 107). [LineLength]
+[ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Movies.java:89:42: Parameter movies should be final. [FinalParameters]
+[ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Movies.java:89:67: Parameter modeRating should be final. [FinalParameters]
+[ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/Movies.java:89:86: Parameter modeDuration should be final. [FinalParameters]
 [ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/SeeDetails.java:19:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/SeeDetails.java:38:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/pages/SeeDetails.java:59: Line is longer than 100 characters (found 102). [LineLength]
@@ -37,4 +44,4 @@ Starting audit...
 [ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/main/Main.java:13:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/maria/Documents/school-work/git-stuff/OOP-Project2.git/./src/main/Test.java:11:28: Using the '.*' form of import should be avoided - java.util.concurrent.*. [AvoidStarImport]
 Audit done.
-Checkstyle ends with 37 errors.
+Checkstyle ends with 44 errors.
