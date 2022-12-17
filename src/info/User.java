@@ -42,10 +42,6 @@ public final class User extends UserInput {
         return visibleMovies;
     }
 
-    public void setVisibleMovies(final ArrayList<Movie> visibleMovies) {
-        this.visibleMovies = visibleMovies;
-    }
-
     public ArrayList<Movie> getPurchasedMovies() {
         return purchasedMovies;
     }

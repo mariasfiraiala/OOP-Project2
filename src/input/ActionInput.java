@@ -60,39 +60,15 @@ public final class ActionInput {
         return startsWith;
     }
 
-    public void setStartsWith(final String startsWith) {
-        this.startsWith = startsWith;
-    }
-
     public FiltersInput getFilters() {
         return filters;
-    }
-
-    public void setFilters(final FiltersInput filters) {
-        this.filters = filters;
     }
 
     public String getCount() {
         return count;
     }
 
-    public void setCount(final String count) {
-        this.count = count;
-    }
-
     public int getRate() {
         return rate;
-    }
-
-    public void setRate(final int rate) {
-        this.rate = rate;
-    }
-
-    public String getObjectType() {
-        return objectType;
-    }
-
-    public void setObjectType(final String objectType) {
-        this.objectType = objectType;
     }
 }

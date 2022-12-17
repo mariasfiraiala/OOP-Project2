@@ -13,6 +13,12 @@ public final class Upgrades extends Page {
         super(name, possibleActions);
     }
 
+    /**
+     * tradeoff between balance and tokens
+     * @param action the info needed for the buying process
+     * @param currentUser the user that wants tokens
+     * @param output writes to file
+     */
     public void buyTokens(final ActionInput action, final User currentUser,
                           final ArrayNode output) {
         int currentBalance = Integer.parseInt(currentUser.getCredentials().getBalance());
@@ -26,6 +32,11 @@ public final class Upgrades extends Page {
         }
     }
 
+    /**
+     * buys premium account
+     * @param currentUser the user that wants to switch to premium
+     * @param output writes to file
+     */
     public void buyPremium(final User currentUser, final ArrayNode output) {
         int currentTokens = currentUser.getTokensCount();
         if (currentTokens < 10) {

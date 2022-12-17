@@ -18,13 +18,23 @@ public final class Movies extends Page {
         super(name, possibleActions);
     }
 
+    /**
+     * prints all visible movies for the current user and gets on the "Movies" page
+     * @param action the action that should be performed before changing the page
+     * @param output writes in file
+     */
     public void changePage(final ActionInput action, final ArrayNode output) {
         selectedMovies = Session.getInstance().getCurrentUser().getVisibleMovies();
-        Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), selectedMovies,
+        Commands.success(Session.getInstance().getCurrentUser(), selectedMovies,
                 output);
         Session.getInstance().setCurrentPage(this);
     }
 
+    /**
+     * searches for a regex from the selected collection and prints all movies
+     * @param startsWith the string with which the movie has to start with
+     * @param output writes to file
+     */
     public void search(final String startsWith, final ArrayNode output) {
         ArrayList<Movie> tmpCurrentMovies = new ArrayList<>();
 
@@ -35,10 +45,15 @@ public final class Movies extends Page {
         }
 
         selectedMovies = tmpCurrentMovies;
-        Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), tmpCurrentMovies,
+        Commands.success(Session.getInstance().getCurrentUser(), tmpCurrentMovies,
                 output);
     }
 
+    /**
+     * filters and sorts the selected collection
+     * @param filter the characteristics of the movies we are interested in
+     * @param output writes to file
+     */
     public void filter(final FiltersInput filter, final ArrayNode output) {
         ArrayList<Movie> tmpCurrentMovies = new ArrayList<>();
         tmpCurrentMovies.addAll(Session.getInstance().getCurrentUser().getVisibleMovies());
@@ -71,7 +86,8 @@ public final class Movies extends Page {
 
         if (filter.getSort() != null) {
             if (filter.getSort().getRating() != null && filter.getSort().getDuration() != null) {
-                sortByRatingAndDuration(tmpCurrentMovies, filter.getSort().getRating(), filter.getSort().getDuration());
+                sortByRatingAndDuration(tmpCurrentMovies, filter.getSort().getRating(),
+                        filter.getSort().getDuration());
             }
 
             if (filter.getSort().getRating() != null) {
@@ -82,11 +98,20 @@ public final class Movies extends Page {
             }
         }
         selectedMovies = tmpCurrentMovies;
-        Commands.searchAndFilterSuccess(Session.getInstance().getCurrentUser(), tmpCurrentMovies,
+        Commands.success(Session.getInstance().getCurrentUser(), tmpCurrentMovies,
                 output);
     }
 
-    private void sortByRatingAndDuration(ArrayList<Movie> movies, String modeRating, String modeDuration) {
+    /**
+     * sorts movies based on both duration and rating: if the movies have the same duration
+     * they'll be sorted based on rating
+     * @param movies the movies we want to sort
+     * @param modeRating decreasing or increasing sorting method for rating
+     * @param modeDuration decreasing or increasing sorting method for duration
+     */
+
+    private void sortByRatingAndDuration(final ArrayList<Movie> movies, final String modeRating,
+                                         final String modeDuration) {
         Comparator<Movie> comparator;
         if (modeDuration.compareTo("decreasing") == 0) {
             comparator = Comparator.comparing(Movie::getDuration, Comparator.reverseOrder());
@@ -101,6 +126,11 @@ public final class Movies extends Page {
         movies.sort(comparator);
     }
 
+    /**
+     * sorts movies by rating only
+     * @param movies the movies we want to sort
+     * @param mode decreasing or increasing sorting method
+     */
     private void sortByRating(final ArrayList<Movie> movies, final String mode) {
         if (mode.compareTo("decreasing") == 0) {
             movies.sort(Comparator.comparingDouble(Movie::getRating).reversed());
@@ -109,6 +139,11 @@ public final class Movies extends Page {
         }
     }
 
+    /**
+     * sorts movies by duration only
+     * @param movies the movies we want to sort
+     * @param mode decreasing or increasing sorting method
+     */
     private void sortByDuration(final ArrayList<Movie> movies, final String mode) {
         if (mode.compareTo("decreasing") == 0) {
             movies.sort(Comparator.comparingDouble(Movie::getDuration).reversed());

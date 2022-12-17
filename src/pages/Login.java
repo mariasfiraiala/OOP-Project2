@@ -12,6 +12,11 @@ public final class Login extends Page {
         super(name, possibleActions);
     }
 
+    /**
+     * action performed on the login page
+     * @param credentials info that will be checked in order to log in the user
+     * @param output writes in file
+     */
     public void login(final CredentialsInput credentials, final ArrayNode output) {
         for (User user : Session.getInstance().getAllUsers()) {
             if (user.getCredentials().getName().compareTo(credentials.getName()) == 0

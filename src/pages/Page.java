@@ -3,8 +3,6 @@ package pages;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import input.ActionInput;
 import platform.Session;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Page {
@@ -16,6 +14,12 @@ public abstract class Page {
         this.name = name;
         this.possibleActions = possibleActions;
     }
+
+    /**
+     * changes the page and prints output to the file according to each page commands
+     * @param action the action that should be performed before changing the page
+     * @param output writes in file
+     */
     public void changePage(final ActionInput action, final ArrayNode output) {
         Session.getInstance().setCurrentPage(this);
     }
@@ -31,6 +35,11 @@ public abstract class Page {
         return nextPages;
     }
 
+    /**
+     * returns a page based on its name
+     * @param pageName the name of the needed page
+     * @return reference to the page
+     */
     public final Page getNextPage(final String pageName) {
         Page pageNext = null;
         for (Page page : nextPages) {
@@ -47,9 +56,5 @@ public abstract class Page {
 
     public final List<String> getPossibleActions() {
         return possibleActions;
-    }
-
-    public final void setPossibleActions(final ArrayList<String> possibleActions) {
-        this.possibleActions = possibleActions;
     }
 }

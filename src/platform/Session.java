@@ -20,6 +20,11 @@ public final class Session {
     private User currentUser;
     private Page currentPage = PageHierarchy.build();
     private Session() { }
+
+    /**
+     * Singleton pattern
+     * @return the newly created object or the already existing one
+     */
     public static Session getInstance() {
         if (instance == null) {
             instance = new Session();
@@ -31,16 +36,8 @@ public final class Session {
         return allMovies;
     }
 
-    public void setAllMovies(final ArrayList<Movie> allMovies) {
-        this.allMovies = allMovies;
-    }
-
     public ArrayList<User> getAllUsers() {
         return allUsers;
-    }
-
-    public void setAllUsers(final ArrayList<User> allUsers) {
-        this.allUsers = allUsers;
     }
 
     public User getCurrentUser() {
@@ -59,6 +56,10 @@ public final class Session {
         this.currentPage = currentPage;
     }
 
+    /**
+     * creates lists for all the users and movies in the system, based on the input
+     * @param data the input from which we extract the needed info
+     */
     public void uploadData(final DataInput data) {
         for (MovieInput movie : data.getMovies()) {
             allMovies.add(new Movie(movie));
@@ -68,6 +69,11 @@ public final class Session {
         }
     }
 
+    /**
+     * applies the commands given from the input
+     * @param actions the commands we implement
+     * @param output writes to file
+     */
     public void startSession(final ArrayList<ActionInput> actions, final ArrayNode output) {
         for (ActionInput action : actions) {
             switch (action.getType()) {
@@ -77,9 +83,11 @@ public final class Session {
                 }
             }
         }
-
     }
 
+    /**
+     * after each test (session), resets the instance to null
+     */
     public void reset() {
         instance = null;
     }

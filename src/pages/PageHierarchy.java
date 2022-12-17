@@ -4,6 +4,11 @@ import java.util.List;
 
 public final class PageHierarchy {
     public PageHierarchy() { }
+
+    /**
+     * constructs the page hierarchy for the website
+     * @return the root of our hierarchy, the "Logout" page
+     */
     public static Page build() {
         Authenticated authenticated = new Authenticated("authenticated",
                 List.of());

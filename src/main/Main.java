@@ -10,6 +10,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main {
+    /**
+     * gets info from the files and writes back to files
+     * @param args the input and output paths
+     * @throws IOException exception thrown at reading
+     */
     public static void main(final String[] args) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayNode output = objectMapper.createArrayNode();

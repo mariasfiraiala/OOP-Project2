@@ -10,15 +10,7 @@ public final class FiltersInput {
         return sort;
     }
 
-    public void setSort(final SortInput sort) {
-        this.sort = sort;
-    }
-
     public ContainsInput getContains() {
         return contains;
-    }
-
-    public void setContains(final ContainsInput contains) {
-        this.contains = contains;
     }
 }

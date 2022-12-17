@@ -6,7 +6,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import info.Movie;
 import info.User;
 import input.ActionInput;
-import pages.*;
+import pages.Login;
+import pages.Movies;
+import pages.Page;
+import pages.Register;
+import pages.SeeDetails;
+import pages.Upgrades;
 import platform.Session;
 
 import java.util.ArrayList;
@@ -14,6 +19,11 @@ import java.util.ArrayList;
 public final class Commands {
     private Commands() { }
 
+    /**
+     * the "change page" action implementation
+     * @param action info needed to change the page
+     * @param output writes to file
+     */
     public static void changePage(final ActionInput action, final ArrayNode output) {
         Page nextPage = null;
         for (Page page : Session.getInstance().getCurrentPage().getNextPages()) {
@@ -29,6 +39,11 @@ public final class Commands {
         }
     }
 
+    /**
+     * the "on page" action implementation
+     * @param action info needed to change the page
+     * @param output writes to file
+     */
     public static void onPage(final ActionInput action, final ArrayNode output) {
         if (!Session.getInstance().getCurrentPage().getPossibleActions().contains(action.
                 getFeature())) {
@@ -80,6 +95,10 @@ public final class Commands {
         }
     }
 
+    /**
+     * prints the generic error
+     * @param output writes to file
+     */
     public static void error(final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.put("error", "Error");
@@ -88,14 +107,11 @@ public final class Commands {
         output.addPOJO(node);
     }
 
-    public static void changePageSuccess(final User currentUser, final ArrayNode output) {
-        ObjectNode node = JsonNodeFactory.instance.objectNode();
-        node.putPOJO("error", null);
-        node.putPOJO("currentMoviesList", deepCopy(currentUser.getVisibleMovies()));
-        node.putPOJO("currentUser", new User(currentUser));
-        output.addPOJO(node);
-    }
-
+    /**
+     * prints the "on page" success (the list of current movies is empty)
+     * @param currentUser the user that made the operation
+     * @param output writes to file
+     */
     public static void onPageSuccess(final User currentUser, final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.putPOJO("error", null);
@@ -104,9 +120,15 @@ public final class Commands {
         output.addPOJO(node);
     }
 
-    public static void searchAndFilterSuccess(final User currentUser,
-                                              final ArrayList<Movie> currentMovies,
-                                              final ArrayNode output) {
+    /**
+     * prints success messages but with custom movie list
+     * @param currentUser the user that made the operation
+     * @param currentMovies the list that needs to be printed
+     * @param output writes to file
+     */
+    public static void success(final User currentUser,
+                               final ArrayList<Movie> currentMovies,
+                               final ArrayNode output) {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         node.putPOJO("error", null);
         node.putPOJO("currentMoviesList", deepCopy(currentMovies));
@@ -114,6 +136,11 @@ public final class Commands {
         output.addPOJO(node);
     }
 
+    /**
+     * deep copies an array of movies
+     * @param movies the movies we want copied
+     * @return the newly created list
+     */
     public static ArrayList<Movie> deepCopy(final ArrayList<Movie> movies) {
         ArrayList<Movie> newMovies = new ArrayList<>();
 

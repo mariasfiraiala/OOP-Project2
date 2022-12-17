@@ -13,6 +13,12 @@ public final class Register extends Page {
         super(name, possibleActions);
     }
 
+    /**
+     * registers a new user to the system after checking whether its new username doesn't already
+     * exist
+     * @param credentials the credentials we base the registration on
+     * @param output writes to file
+     */
     public void register(final CredentialsInput credentials, final ArrayNode output) {
         for (User user : Session.getInstance().getAllUsers()) {
             if (credentials.getName().compareTo(user.getCredentials().getName()) == 0) {
