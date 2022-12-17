@@ -79,8 +79,7 @@ public final class Session {
             switch (action.getType()) {
                 case "change page" -> Commands.changePage(action, output);
                 case "on page" -> Commands.onPage(action, output);
-                default -> {
-                }
+                default -> throw new IllegalStateException("Unexpected value: " + action.getType());
             }
         }
     }

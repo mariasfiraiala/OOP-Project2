@@ -25,13 +25,7 @@ public final class Commands {
      * @param output writes to file
      */
     public static void changePage(final ActionInput action, final ArrayNode output) {
-        Page nextPage = null;
-        for (Page page : Session.getInstance().getCurrentPage().getNextPages()) {
-            if (page.getName().compareTo(action.getPage()) == 0) {
-                nextPage = page;
-            }
-        }
-
+        Page nextPage = Session.getInstance().getCurrentPage().getNextPage(action.getPage());
         if (nextPage == null) {
             error(output);
         } else {
@@ -50,47 +44,28 @@ public final class Commands {
             error(output);
         } else {
             switch (action.getFeature()) {
-                case "register":
-                    ((Register) Session.getInstance().getCurrentPage()).register(action.
-                            getCredentials(), output);
-                    break;
-                case "login":
-                    ((Login) Session.getInstance().getCurrentPage()).login(action.getCredentials(),
-                            output);
-                    break;
-                case "search":
-                    ((Movies) Session.getInstance().getCurrentPage()).search(action.getStartsWith(),
-                            output);
-                    break;
-                case "filter":
-                    ((Movies) Session.getInstance().getCurrentPage()).filter(action.getFilters(),
-                            output);
-                    break;
-                case "buy tokens":
-                    ((Upgrades) Session.getInstance().getCurrentPage()).buyTokens(action,
-                            Session.getInstance().getCurrentUser(), output);
-                    break;
-                case "buy premium account":
-                    ((Upgrades) Session.getInstance().getCurrentPage()).buyPremium(Session.
-                            getInstance().getCurrentUser(), output);
-                    break;
-                case "purchase":
-                    ((SeeDetails) Session.getInstance().getCurrentPage()).purchase(Session.
-                            getInstance().getCurrentUser(), output);
-                    break;
-                case "watch":
-                    ((SeeDetails) Session.getInstance().getCurrentPage()).watch(Session.
-                            getInstance().getCurrentUser(), output);
-                    break;
-                case "like":
-                    ((SeeDetails) Session.getInstance().getCurrentPage()).like(Session.
-                            getInstance().getCurrentUser(), output);
-                    break;
-                case "rate":
-                    ((SeeDetails) Session.getInstance().getCurrentPage()).rate(action.getRate(),
-                            Session.getInstance().getCurrentUser(), output);
-                default:
-                    break;
+                case "register" -> ((Register) Session.getInstance().getCurrentPage()).
+                        register(action.getCredentials(), output);
+                case "login" -> ((Login) Session.getInstance().getCurrentPage()).
+                        login(action.getCredentials(), output);
+                case "search" -> ((Movies) Session.getInstance().getCurrentPage()).
+                        search(action.getStartsWith(), output);
+                case "filter" -> ((Movies) Session.getInstance().getCurrentPage()).
+                        filter(action.getFilters(), output);
+                case "buy tokens" -> ((Upgrades) Session.getInstance().getCurrentPage()).
+                        buyTokens(action, Session.getInstance().getCurrentUser(), output);
+                case "buy premium account" -> ((Upgrades) Session.getInstance().getCurrentPage()).
+                        buyPremium(Session.getInstance().getCurrentUser(), output);
+                case "purchase" -> ((SeeDetails) Session.getInstance().getCurrentPage()).
+                        purchase(Session.getInstance().getCurrentUser(), output);
+                case "watch" -> ((SeeDetails) Session.getInstance().getCurrentPage()).
+                        watch(Session.getInstance().getCurrentUser(), output);
+                case "like" -> ((SeeDetails) Session.getInstance().getCurrentPage()).
+                        like(Session.getInstance().getCurrentUser(), output);
+                case "rate" -> ((SeeDetails) Session.getInstance().getCurrentPage()).
+                        rate(action.getRate(), Session.getInstance().getCurrentUser(), output);
+                default -> throw new IllegalStateException("Unexpected value: "
+                        + action.getFeature());
             }
         }
     }
